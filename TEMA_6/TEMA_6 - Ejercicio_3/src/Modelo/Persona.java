@@ -34,7 +34,7 @@ public class Persona {
         return dNacimiento;
     }
 
-    public void setdNacimiento(String dNacimiento) {
+    public void setdNacimiento(int dNacimiento) {
         this.dNacimiento = dNacimiento;
     }
 
@@ -42,7 +42,7 @@ public class Persona {
         return mNacimiento;
     }
 
-    public void setmNacimiento(String mNacimiento) {
+    public void setmNacimiento(int mNacimiento) {
         this.mNacimiento = mNacimiento;
     }
 
@@ -50,7 +50,7 @@ public class Persona {
         return aNacimiento;
     }
 
-    public void setaNacimiento(String aNacimiento) {
+    public void setaNacimiento(int aNacimiento) {
         this.aNacimiento = aNacimiento;
     }
 
@@ -70,7 +70,7 @@ public class Persona {
         this.codPostal = codPostal;
     }
 
-    public boolean getCiudad() {
+    public String getCiudad() {
         return ciudad;
     }
 

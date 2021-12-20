@@ -1,10 +1,12 @@
 package com.company;
 
+import Excepciones.AñoNoValidoException;
+import Excepciones.CampoNoRellenoException;
 import Excepciones.DatoNoValidoException;
 import Modelo.Persona;
-import jdk.nashorn.internal.scripts.JO;
-
 import javax.swing.JOptionPane;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
@@ -20,42 +22,45 @@ public class Main {
         *   - Número de personas mayores de edad
         * Hay que comprobar que todos los campos contienen información y que es lógica.*/
         try{
-            persona = new ArrayList<>();
-            obtenerDatos();
+            do {
+                persona = new ArrayList<>();
+                obtenerDatos();
+            }
+            while (JOptionPane.showConfirmDialog(null, "¿Quiere continuar?: ")==0);
+            //Una vez el usuario decida no continuar creando persanas, se procede a mostrar los datos pedidos por el ejercicio:
+            buscarDeElche();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "ERROR: " + e.getClass());
         }
     }
-    public static void obtenerDatos(){
+    public static void obtenerDatos() throws DatoNoValidoException {
+        String nombre = JOptionPane.showInputDialog("Nombre de la persona: ");
+        validarNombre(nombre);
+
+        /*La generacion de la fecha se hace de manera diferente, el método que se usa en en el resto de casos da
+        problemas en caso de que el dato que se quiere introducir sea int:*/
+        int dNacimiento, mNacimiento, aNacimiento;
         do{
-            try {
-                do {
-                    String nombre = JOptionPane.showInputDialog("Nombre de la persona: ");
-                    validarNombre(nombre);
-                    String dNac = JOptionPane.showInputDialog("Día de nacimiento: ");
-                    String mNac = JOptionPane.showInputDialog("Mes de nacimiento: ");
-                    String aNac = JOptionPane.showInputDialog("Año de nacimiento: ");
-                    validarFecha(dNac, mNac, aNac);
-                    String dir = JOptionPane.showInputDialog("Dirección: ");
-                    String codPostal = JOptionPane.showInputDialog("Código postal: ");
-                    String ciudad = JOptionPane.showInputDialog("Ciudad: ");
-                    validarCodPostal(codPostal);
-                    //Añadir los datos del alumno a la clase persona:
-                    Persona a = new Persona(nombre, dNac, mNac, aNac, dir, codPostal, ciudad);
-                    //Añadir la nueva persona creado en el la lista arrayList:
-                    persona.add(a);
-                }
-                while (JOptionPane.showConfirmDialog(null, "¿Quiere continuar?: ")==0);
-            }
-            catch (DatoNoValidoException e){
-                JOptionPane.showMessageDialog(null, "ERROR: el dato introducido no es válido");
-            }
-            catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "ERROR: formato no correcto");
-            }
+            //Pedir al usuario día, mes y año; la fecha se puede contruir posteriormente de ser necesario:
+            dNacimiento = pediDia();
+            mNacimiento = pedirMes();
+            aNacimiento = pedirAño();
         }
-        while(JOptionPane.showConfirmDialog(null, "¿Quieres continuar?: ")==0);
+        while (validarFecha(dNacimiento, mNacimiento, aNacimiento));
+
+        String dir = JOptionPane.showInputDialog("Dirección: ");
+
+        String codPostal = JOptionPane.showInputDialog("Código postal: ");
+
+        String ciudad = JOptionPane.showInputDialog("Ciudad: ");
+        validarCodPostal(codPostal);
+
+        //Añadir los datos del alumno a la clase persona:
+        Persona a = new Persona(nombre, dNacimiento, mNacimiento, aNacimiento, dir, codPostal, ciudad);
+
+        //Añadir la nueva persona creado en el la lista arrayList:
+        persona.add(a);
     }
 
     public static void validarNombre(String nombre) throws DatoNoValidoException {
@@ -64,22 +69,102 @@ public class Main {
             throw new DatoNoValidoException();
         }
     }
-    public static void validarFecha(String dNac, String mNac, String aNac) throws NumberFormatException, DatoNoValidoException{
-        try{
-            int dNacimiento = Integer.parseInt(dNac);
-            int mNacimiento = Integer.parseInt(mNac);
-            int aNacimiento = Integer.parseInt(aNac);
-            //Condiciones para realizar DatoNoValido:
-            if (aNacimiento > 2021 || mNacimiento > 12 || mNacimiento < 1 || dNacimiento > 31 || dNacimiento < 1){
-                throw new DatoNoValidoException();
+    public static int pediDia(){
+        boolean problemas = true;:
+        int dia = 0;
+        do {
+            try {
+                String d = JOptionPane.showInputDialog("Día de nacimiento: ");
+                if (d.isEmpty()){
+                    throw new CampoNoRellenoException();
+                }
+                dia = Integer.parseInt(d);
+                if (dia < 1 || dia > 31){
+                    throw new DatoNoValidoException();
+                }
+                problemas = false;
             }
-            if (aNac.length() < 4 ){
-                throw new DatoNoValidoException();
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "ERROR: Escribe un número");
+            }
+            catch (CampoNoRellenoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: Campo obligatorio no completado");
+            }
+            catch (DatoNoValidoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: escriba un dia real");
             }
         }
-        catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"ERROR");
+        while (problemas);
+        return dia;
+    }
+    public static int pedirMes(){
+        boolean problemas = true;
+        int mes = 0;
+        do {
+           try {
+               String m = JOptionPane.showInputDialog(null, "Mes de nacimiento: ");
+               if (m.isEmpty()){
+                   throw new CampoNoRellenoException();
+               }
+               mes = Integer.parseInt(m);
+               if (mes < 1 || mes > 12){
+                   throw new DatoNoValidoException();
+               }
+               problemas = false;
+           }
+           catch (CampoNoRellenoException e){
+               JOptionPane.showMessageDialog(null, "ERROR: campo obligatorio no completado");
+           }
+           catch (NumberFormatException e){
+               JOptionPane.showMessageDialog(null, "ERROR: El mes debe ser numérico");
+           }
+           catch (DatoNoValidoException e){
+               JOptionPane.showMessageDialog(null, "ERROR: Mes introducido no es correcto");
+           }
         }
+        while (problemas);
+        return mes;
+    }
+    public static int pedirAño(){
+        boolean problemas = true;
+        int año = 0;
+        do {
+            try {
+                String a = JOptionPane.showInputDialog("Año de nacimiento: ");
+                if (a.isEmpty()){
+                    throw new CampoNoRellenoException();
+                }
+                año = Integer.parseInt(a);
+                if (año < 1910 || año > 2021){
+                    //Se considera que si no ha personas vivas nacidas antes de 1910
+                    throw new AñoNoValidoException();
+                }
+                problemas = false;
+            }
+            catch (CampoNoRellenoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: Campo obligatorio no completado");
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "ERROR: El año debe ser numérico");
+            }
+            catch (AñoNoValidoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: Año no valido");
+            }
+        }
+        while (problemas);
+        return año;
+    }
+    public static boolean validarFecha(int dia, int mes, int año){
+        //Construir fecha y comprobar que esta es lógica:
+        try {
+            LocalDate fechaNac = LocalDate.of(año, mes, dia);
+            //En caso de que no se produzca un error:
+            return false;
+        }
+        catch (DateTimeException e){
+            JOptionPane.showMessageDialog(null, "ERROR: la fehca introducida no es correcta");
+        }
+        return true;
     }
     public static void validarCodPostal(String codPostal) throws NumberFormatException, DatoNoValidoException{
         int CodPostal = Integer.parseInt(codPostal);
@@ -87,7 +172,7 @@ public class Main {
             throw new DatoNoValidoException();
         }
     }
-    public static void deElche(){
+    public static void buscarDeElche(){
         StringBuilder listaElche = new StringBuilder();
         for (int x = 0; x < persona.size(); x++){
             if (persona.get(x).getCiudad()){
