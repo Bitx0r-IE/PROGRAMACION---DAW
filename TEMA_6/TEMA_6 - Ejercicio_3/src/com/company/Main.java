@@ -2,6 +2,7 @@ package com.company;
 
 import Excepciones.AñoNoValidoException;
 import Excepciones.CampoNoRellenoException;
+import Excepciones.CodigoNoValidoException;
 import Excepciones.DatoNoValidoException;
 import Modelo.Persona;
 import javax.swing.JOptionPane;
@@ -28,7 +29,7 @@ public class Main {
             }
             while (JOptionPane.showConfirmDialog(null, "¿Quiere continuar?: ")==0);
             //Una vez el usuario decida no continuar creando persanas, se procede a mostrar los datos pedidos por el ejercicio:
-            buscarDeElche();
+            buscadorMayorEdad();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "ERROR: " + e.getClass());
@@ -50,11 +51,13 @@ public class Main {
         while (validarFecha(dNacimiento, mNacimiento, aNacimiento));
 
         String dir = JOptionPane.showInputDialog("Dirección: ");
+        validarDireccion(dir);
 
         String codPostal = JOptionPane.showInputDialog("Código postal: ");
+        validarCodPostal(codPostal);
 
         String ciudad = JOptionPane.showInputDialog("Ciudad: ");
-        validarCodPostal(codPostal);
+        validarCiudad(ciudad);
 
         //Añadir los datos del alumno a la clase persona:
         Persona a = new Persona(nombre, dNacimiento, mNacimiento, aNacimiento, dir, codPostal, ciudad);
@@ -63,14 +66,23 @@ public class Main {
         persona.add(a);
     }
 
-    public static void validarNombre(String nombre) throws DatoNoValidoException {
-        boolean isNumeric = nombre.chars().allMatch(Character::isDigit);
-        if (isNumeric == false){
-            throw new DatoNoValidoException();
+    public static void validarNombre(String nombre){
+        boolean problemas = true;
+        do {
+            try {
+                if (nombre.isEmpty()){
+                    throw new DatoNoValidoException();
+                }
+                problemas = false;
+            }
+            catch (DatoNoValidoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: campo obligatio no completado");
+            }
         }
+        while (problemas);
     }
     public static int pediDia(){
-        boolean problemas = true;:
+        boolean problemas = true;
         int dia = 0;
         do {
             try {
@@ -167,17 +179,71 @@ public class Main {
         return true;
     }
     public static void validarCodPostal(String codPostal) throws NumberFormatException, DatoNoValidoException{
-        int CodPostal = Integer.parseInt(codPostal);
-        if (codPostal.length() < 5){
-            throw new DatoNoValidoException();
-        }
-    }
-    public static void buscarDeElche(){
-        StringBuilder listaElche = new StringBuilder();
-        for (int x = 0; x < persona.size(); x++){
-            if (persona.get(x).getCiudad()){
-                listaElche.append(persona.toString()+"\n");
+        boolean problemas = true;
+        do{
+            try {
+                //Comprobar existencia, tamaño y que sea un dato numérico:
+                if (codPostal.isEmpty()){
+                    throw new CampoNoRellenoException();
+                }
+                if (codPostal.length() != 5){
+                    throw new CodigoNoValidoException();
+                }
+                Integer.parseInt(codPostal);
             }
+            catch (CampoNoRellenoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: El campo es obligatorio");
+            }
+            catch (CodigoNoValidoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: código introducido no válido, tmaño incorrecto");
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "ERROR: El código postal tiene que ser numérico");
+            }
+        }
+        while (problemas);
+    }
+    public static void validarCiudad(String ciudad){
+        boolean problemas = true;
+        do {
+            try {
+                if (ciudad.isEmpty()){
+                    throw new CampoNoRellenoException();
+                }
+                problemas = false;
+            }
+            catch (CampoNoRellenoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: Campo obligatorio sin completar");
+            }
+        }
+        while (problemas);
+    }
+    /*validarCiudad y validarDireccion son identicos, solo realizan la funcion de comprobar se el campo está vacío,
+    * pero están tienen funciones d e validación diferentes en caso de que en alguno de ellos se necesiten nuevas
+    * especificaciones de validación*/
+    public static void validarDireccion(String dir){
+        boolean problemas = true;
+        do {
+            try {
+                if (dir.isEmpty()){
+                    throw new CampoNoRellenoException();
+                }
+                problemas = false;
+            }
+            catch (CampoNoRellenoException e){
+                JOptionPane.showMessageDialog(null, "ERROR: Campo obligatorio sin completar");
+            }
+        }
+        while(problemas);
+    }
+    public static void buscadorMayorEdad(){
+        int mayor = 0;
+        int posMayor = 0;
+
+        StringBuilder listadoNombres = new StringBuilder();
+
+        for (int x = 0; x < persona.size(); x++){
+            int edad = 
         }
     }
 }
