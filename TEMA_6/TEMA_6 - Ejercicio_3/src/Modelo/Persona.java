@@ -86,7 +86,8 @@ public class Persona {
         return periodo.getYears();
     }
     public boolean mayorEdad(){
-        return this.ciudad.equals(ciudad);
+        //al llamar a esta operación calcula la edad y devuelve true si la condicion >= 18 se cumple
+        return this.calcularEdad() >= 18;
     }
     public boolean isCiudad(String ciudad){
         return this.ciudad.equals(ciudad);
