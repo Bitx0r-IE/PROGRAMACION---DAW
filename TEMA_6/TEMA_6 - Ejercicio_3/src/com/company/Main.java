@@ -239,11 +239,49 @@ public class Main {
     public static void buscadorMayorEdad(){
         int mayor = 0;
         int posMayor = 0;
+        String nombreElche = "";
+        StringBuilder listadoNombresMayor = new StringBuilder();
 
-        StringBuilder listadoNombres = new StringBuilder();
-
+        //Durante la duración del bucle se buscarán los tres apartados que pide el ejercicio:
         for (int x = 0; x < persona.size(); x++){
-            int edad = 
+            //Calcular la posición del mayor de edad:
+            //La edad se calcula con .calcularEdad(), previamente creado en el Pesona
+            int edad = persona.get(x).calcularEdad();
+            if (edad > mayor){
+                posMayor = x;
+                mayor = edad;
+            }
+            //Buscar a personas que vivan en Elche:
+            if (persona.get(x).isCiudad("Elche")){
+                nombreElche += persona.get(x).getNombre() + "\n";
+            }
+            //Buscar mayores de edad:
+            if (persona.get(x).mayorEdad()){
+                listadoNombresMayor.append(persona.get(x).getNombre()).append("\n");
+            }
+        }
+        //Mostrar resultados de las busquedas:
+        mostrarBusqueda(mayor, posMayor, nombreElche, listadoNombresMayor);
+    }
+    public static void  mostrarBusqueda(int mayor, int posMayor, String nombreElche, StringBuilder listadoNombresMayor){
+        //Persona más mayor de la lista:
+        JOptionPane.showMessageDialog(null, "La persona más mayor es: "
+                + persona.get(posMayor).getNombre() + "\n" + "Edad: " + mayor + " años");
+
+        //Personas de Elche:
+        if (nombreElche.compareTo("")==0){
+            JOptionPane.showMessageDialog(null, "En el Elche viven: ");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "En Elche viven: " + nombreElche);
+        }
+
+        //Personas mayores de edad:
+        if (listadoNombresMayor.toString().compareTo("")==0){
+            JOptionPane.showMessageDialog(null, "Personas mayores de edad: ");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Personas mayores de edad: " + listadoNombresMayor);
         }
     }
 }
