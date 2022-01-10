@@ -1,6 +1,7 @@
 package Modelo;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Pelicula {
     private String titulo;
@@ -8,11 +9,14 @@ public class Pelicula {
     private int duracion;
     private String tipo;
 
-    public Pelicula(String titulo, int año, int duracion, String tipo) {
+    private ArrayList<Estudio> estudioProd;
+
+    public Pelicula(String titulo, int año, int duracion, String tipo, ArrayList<Estudio> estudioProd) {
         this.titulo = titulo;
         this.año = año;
         this.duracion = duracion;
         this.tipo = tipo;
+        this.estudioProd = estudioProd;
     }
 
     public String getTitulo(String titulo){
