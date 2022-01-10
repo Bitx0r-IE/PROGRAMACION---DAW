@@ -26,5 +26,29 @@ public class Pelicula {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public int getAño(int año){
+        return año;
+    }
+
+    public void setAño(int año) {
+        this.año = año;
+    }
+
+    public int getDuracion(int duracion){
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public String getTipo(String tipo){
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }
 
