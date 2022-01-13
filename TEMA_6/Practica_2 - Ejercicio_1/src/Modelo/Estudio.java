@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Estudio {
@@ -7,22 +8,22 @@ public class Estudio {
     private String ciudad;
     private String direccion;
     private String direccionWeb;
-    private int fundacion;
+    private LocalDate fundacion;
     private String pais;
-    private int telefono;
 
-    private ArrayList<Pelicula> peliProducida;
+    private ArrayList<String> telefonos;
 
-    public Estudio(String nombre, String ciudad, String direccion, String direccionWeb, int fundacion, String pais, int telefono, ArrayList<Pelicula> peliProducida) {
+    public Estudio(String nombre, String ciudad, String direccion, String direccionWeb, LocalDate fundacion, String pais, ArrayList<String> telefonos) {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
         this.direccionWeb = direccionWeb;
         this.fundacion = fundacion;
         this.pais = pais;
-        this.telefono = telefono;
-        this.peliProducida = peliProducida;
+        this.telefonos = telefonos;
     }
+
+    //get  set  de los atributos
 
     public String getNombre (String nombre){
         return nombre;
@@ -60,7 +61,7 @@ public class Estudio {
         return fundacion;
     }
 
-    public void setFundacion(int fundacion) {
+    public void setFundacion(LocalDate fundacion) {
         this.fundacion = fundacion;
     }
 
@@ -72,11 +73,4 @@ public class Estudio {
         this.pais = pais;
     }
 
-    public int getTelefono(int telefono){
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
 }

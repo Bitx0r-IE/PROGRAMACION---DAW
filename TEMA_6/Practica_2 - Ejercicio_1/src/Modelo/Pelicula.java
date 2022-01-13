@@ -6,18 +6,20 @@ import java.util.ArrayList;
 public class Pelicula {
     private String titulo;
     private int año;
-    private int duracion;
+    private float duracion;
     private String tipo;
 
     private ArrayList<Estudio> estudioProd;
 
-    public Pelicula(String titulo, int año, int duracion, String tipo, ArrayList<Estudio> estudioProd) {
+    public Pelicula(String titulo, int año, float duracion, String tipo, ArrayList<Estudio> estudioProd) {
         this.titulo = titulo;
         this.año = año;
         this.duracion = duracion;
         this.tipo = tipo;
         this.estudioProd = estudioProd;
     }
+
+    //get   set  de los atributos
 
     public String getTitulo(String titulo){
         return titulo;
@@ -35,11 +37,11 @@ public class Pelicula {
         this.año = año;
     }
 
-    public int getDuracion(int duracion){
-        return duracion;
+    public int getDuracion(float duracion){
+        return (int) duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(float duracion) {
         this.duracion = duracion;
     }
 
