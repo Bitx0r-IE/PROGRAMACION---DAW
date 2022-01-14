@@ -1,6 +1,7 @@
 package Modelo;
 
-public class Empleados {
+public abstract class Empleados {
+    //en la clase padre es mejor poner protected en vez de private:
     private String nombre;
     private int edad;
     private int salario;
