@@ -1,6 +1,8 @@
 package com.company;
 
 import Modelo.*;
+import org.omg.CORBA.FREE_MEM;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
@@ -43,5 +45,6 @@ public class Main {
         //Directivos:
         listaDirectivos = new ArrayList();
         //Directivo 1:
+        listaDirectivos.add(new Directivo("Michael", 40, 30000, "directivo"));
     }
 }
