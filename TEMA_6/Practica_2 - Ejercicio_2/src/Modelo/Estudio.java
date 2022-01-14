@@ -14,6 +14,9 @@ public class Estudio {
 
     //Constructor:
 
+    public Estudio() {
+    }
+
     public Estudio(String nombre, String ciudad, String direccion, String dirWeb, LocalDate fundacion, String pais, ArrayList<String> telefonos) {
         this.nombre = nombre;
         this.ciudad = ciudad;

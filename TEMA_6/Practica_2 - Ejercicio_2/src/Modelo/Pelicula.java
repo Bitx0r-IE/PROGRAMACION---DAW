@@ -59,4 +59,5 @@ public class Pelicula {
     public void setEstudiosCine(ArrayList<Estudio> estudiosCine) {
         this.estudiosCine = estudiosCine;
     }
+
 }
