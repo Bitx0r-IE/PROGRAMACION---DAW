@@ -9,4 +9,14 @@ public class Cliente extends Persona{
         super(nombre, edad);
         this.telefono = telefono;
     }
+
+    //set y get:
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 }
