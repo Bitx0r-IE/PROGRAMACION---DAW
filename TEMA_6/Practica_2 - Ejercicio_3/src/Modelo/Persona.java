@@ -28,4 +28,10 @@ public class Persona {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    //to String es lo mismo:
+    public String mostrar(){
+        return this.nombre + " " + this.edad;
+    }
+
 }

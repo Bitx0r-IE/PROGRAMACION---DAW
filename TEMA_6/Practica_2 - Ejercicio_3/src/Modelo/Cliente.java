@@ -19,4 +19,9 @@ public class Cliente extends Persona{
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    @Override
+    public String mostrar() {
+        return super.mostrar() + this.telefono;
+    }
 }
