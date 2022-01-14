@@ -21,6 +21,7 @@ public class Main {
             crearPeliculas();
             buscarPeliculaMasLarga();
             buscarEstudioConMasPeliculas();
+            RelacionEstudiosPeliculas();
         }
         catch(Exception e)
         {
@@ -119,7 +120,7 @@ public class Main {
         // Estudios de la pelÃ­cula
         lista = new ArrayList();
         lista.add(listaEstudios[1]);
-        listaPeliculas.add(new Pelicula("El rey leÃ³n",año,97,"Infantil",lista));
+        listaPeliculas.add(new Pelicula("El rey león",año,97,"Infantil",lista));
     }
 
     public static void buscarPeliculaMasLarga() throws Exception{
@@ -135,12 +136,12 @@ public class Main {
             }
         }
 
-        // Nombre de todos los estudios que han producido la pelÃ­cula
+        // Nombre de todos los estudios que han producido la película
         String mensaje = "";
         for (int x = 0; x < objeto.getEstudiosCine().size();x++)
             mensaje += " " + objeto.getEstudiosCine().get(x).getNombre();
 
-        javax.swing.JOptionPane.showMessageDialog(null," La pelicula mÃ¡s larga es " + objeto.getTitulo()+ " y se ha producido en " + mensaje);
+        javax.swing.JOptionPane.showMessageDialog(null," La pelicula más larga es " + objeto.getTitulo()+ " y se ha producido en " + mensaje);
     }
 
     public static void buscarEstudioConMasPeliculas() throws Exception{
@@ -150,7 +151,7 @@ public class Main {
         int [] numeroPeliculas = new int[5];
         Arrays.fill(numeroPeliculas, 0);
 
-        // Por cada Estudio recorro la lista de todas las pelÃ­culas para ver si estÃ¡ o no.
+        // Por cada Estudio recorro la lista de todas las películas para ver si está o no.
         for(int z = 0;z < listaEstudios.length; z++)
             for(int x=0; x < listaPeliculas.size();x++)
             {
@@ -166,7 +167,7 @@ public class Main {
                 }
             }
 
-        // Busco el mÃ¡ximo contador
+        // Busco el máximo contador
         int maximo = 0;
         int posicion = 0;
         for (int x = 0; x < numeroPeliculas.length; x++)
@@ -178,7 +179,9 @@ public class Main {
 
         javax.swing.JOptionPane.showMessageDialog(null,"El estudio que más peliculas ha producido es: " + listaEstudios[posicion].getNombre() + " y ha producido "+ maximo);
     }
-
+    public static void RelacionEstudiosPeliculas(){
+        
+    }
 }
 
 

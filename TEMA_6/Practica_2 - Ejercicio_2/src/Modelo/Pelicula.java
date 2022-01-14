@@ -20,7 +20,7 @@ public class Pelicula {
     }
 
     // get y set de los atributos:
-    public String getTitulo(String titulo){
+    public String getTitulo(){
         return titulo;
     }
 
@@ -28,7 +28,7 @@ public class Pelicula {
         this.titulo = titulo;
     }
 
-    public String getAño (String año){
+    public int getAño (){
         return año;
     }
 
