@@ -16,6 +16,8 @@ public class Main {
         // try catch generico:
         try {
             crearPersona();
+            //crear emopresa:
+
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "ERROR: " + e.getClass());

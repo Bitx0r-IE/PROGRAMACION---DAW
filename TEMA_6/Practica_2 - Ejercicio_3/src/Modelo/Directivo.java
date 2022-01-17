@@ -23,8 +23,19 @@ public class Directivo extends Empleado{
         this.categoria = categoria;
     }
 
+    public ArrayList<Empleado> getSubordinados() {
+        return subordinados;
+    }
+
+    public void setSubordinados(ArrayList<Empleado> subordinados) {
+        this.subordinados = subordinados;
+    }
+
     @Override
-    public String mostrar() {
-        return this.getNombre()+ " " + this.getEdad() + " " +  this.getSueldoBruto() + " " + this.getCategoria();
+    public String toString() {
+        return "Directivo{" +
+                "categoria='" + categoria + '\'' +
+                ", subordinados=" + subordinados +
+                '}';
     }
 }
