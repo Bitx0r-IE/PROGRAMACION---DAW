@@ -8,9 +8,9 @@ public class Gato extends Mascota{
     private boolean castrado;
 
     //Constructor:
-    public Gato(String tipo, String raza, String nombre, LocalDate fecha_nac, String sexo, String peso,
+    public Gato(String raza, String nombre, LocalDate fecha_nac, String sexo, float peso,
                 String tipoPelo, boolean casero, String enfCronica, boolean castrado) {
-        super(tipo, raza, nombre, fecha_nac, sexo, peso, tipoPelo);
+        super(raza, nombre, fecha_nac, sexo, peso, tipoPelo);
         this.casero = casero;
         this.enfCronica = enfCronica;
         this.castrado = castrado;

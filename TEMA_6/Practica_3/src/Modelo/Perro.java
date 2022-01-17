@@ -8,9 +8,9 @@ public class Perro extends Mascota{
     private boolean chip;
 
     //Constructor:
-    public Perro(String tipo, String raza, String nombre, LocalDate fecha_nac, String sexo, String peso,
+    public Perro(String raza, String nombre, LocalDate fecha_nac, String sexo, float peso,
                  String tipoPelo, boolean castrado, String enfCronica, boolean chip) {
-        super(tipo, raza, nombre, fecha_nac, sexo, peso, tipoPelo);
+        super(raza, nombre, fecha_nac, sexo, peso, tipoPelo);
         this.castrado = castrado;
         this.enfCronica = enfCronica;
         this.chip = chip;

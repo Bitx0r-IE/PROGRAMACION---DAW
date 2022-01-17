@@ -8,12 +8,11 @@ public class Mascota {
     private String nombre;
     private LocalDate fecha_nac;
     private String sexo;
-    private String peso;
+    private float peso;
     private String tipoPelo;
 
     //Constructor:
-    public Mascota(String tipo, String raza, String nombre, LocalDate fecha_nac, String sexo, String peso, String tipoPelo) {
-        this.tipo = tipo;
+    public Mascota(String raza, String nombre, LocalDate fecha_nac, String sexo, float peso, String tipoPelo) {
         this.raza = raza;
         this.nombre = nombre;
         this.fecha_nac = fecha_nac;
@@ -23,14 +22,6 @@ public class Mascota {
     }
 
     //get y set:
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
     public String getRaza() {
         return raza;
@@ -64,11 +55,11 @@ public class Mascota {
         this.sexo = sexo;
     }
 
-    public String getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(String peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
@@ -78,5 +69,10 @@ public class Mascota {
 
     public void setTipoPelo(String tipoPelo) {
         this.tipoPelo = tipoPelo;
+    }
+
+    //Mostrar datos del cliente:
+    public String getDueño(Cliente dueño) {
+        return Cliente.toString();
     }
 }
