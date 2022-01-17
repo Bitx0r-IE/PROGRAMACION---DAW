@@ -1,2 +1,5 @@
-package Modelo;public class Cliente {
+package Modelo;
+
+public class Cliente {
+    
 }

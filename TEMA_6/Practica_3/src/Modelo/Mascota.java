@@ -1,2 +1,4 @@
-package Modelo;public class Mascota {
+package Modelo;
+
+public class Mascota {
 }
