@@ -13,7 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            do {
 
+            }
+            while (JOptionPane.showConfirmDialog(null, "¿Quiere continuar?")==0);
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "ERROR: " + e.getClass());

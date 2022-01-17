@@ -7,8 +7,4 @@ public class Cliente extends Persona{
         super(nombre, direccion, telefono);
     }
 
-    @Override
-    public static String toString() {
-        return "Cliente{}";
-    }
 }

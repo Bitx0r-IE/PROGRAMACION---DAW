@@ -71,8 +71,4 @@ public class Mascota {
         this.tipoPelo = tipoPelo;
     }
 
-    //Mostrar datos del cliente:
-    public String getDueño(Cliente dueño) {
-        return Cliente.toString();
-    }
 }

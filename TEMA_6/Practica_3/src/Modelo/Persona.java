@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Persona {
+public  class Persona {
     private String nombre;
     private String direccion;
     private int telefono;
@@ -37,12 +37,4 @@ public class Persona {
         this.direccion = direccion;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                '}';
-    }
 }
