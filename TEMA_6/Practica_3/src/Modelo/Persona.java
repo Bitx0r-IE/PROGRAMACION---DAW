@@ -1,15 +1,21 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public  class Persona {
     private String nombre;
     private String direccion;
-    private int telefono;
+    private String telefono;
+
+    private ArrayList<Mascota> listaMascotas;
 
     //Constructor:
-    public Persona(String nombre, String direccion, int telefono) {
+    public Persona(String nombre, String direccion, String telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+
+        this.listaMascotas = new ArrayList<>();
     }
 
     //get y set:
@@ -21,11 +27,11 @@ public  class Persona {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

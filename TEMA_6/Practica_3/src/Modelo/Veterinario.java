@@ -2,11 +2,11 @@ package Modelo;
 
 public class Veterinario extends Persona{
     private String dni;
-    private int numSegSocial;
+    private String numSegSocial;
 
     //Constructor:
 
-    public Veterinario(String nombre, String direccion, int telefono, String dni, int numSegSocial) {
+    public Veterinario(String nombre, String direccion, String telefono, String dni, String numSegSocial) {
         super(nombre, direccion, telefono);
         this.dni = dni;
         this.numSegSocial = numSegSocial;
@@ -21,11 +21,11 @@ public class Veterinario extends Persona{
         this.dni = dni;
     }
 
-    public int getNumSegSocial() {
+    public String getNumSegSocial() {
         return numSegSocial;
     }
 
-    public void setNumSegSocial(int numSegSocial) {
+    public void setNumSegSocial(String numSegSocial) {
         this.numSegSocial = numSegSocial;
     }
 }

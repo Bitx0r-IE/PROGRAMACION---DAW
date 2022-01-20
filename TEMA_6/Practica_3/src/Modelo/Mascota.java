@@ -3,13 +3,15 @@ package Modelo;
 import java.time.LocalDate;
 
 public class Mascota {
-    private String tipo;
     private String raza;
     private String nombre;
     private LocalDate fecha_nac;
     private String sexo;
     private float peso;
     private String tipoPelo;
+
+    private Cliente dueño;
+    private Veterinario vet;
 
     //Constructor:
     public Mascota(String raza, String nombre, LocalDate fecha_nac, String sexo, float peso, String tipoPelo) {
@@ -71,4 +73,19 @@ public class Mascota {
         this.tipoPelo = tipoPelo;
     }
 
+    public Cliente getDueño() {
+        return dueño;
+    }
+
+    public void setDueño(Cliente dueño) {
+        this.dueño = dueño;
+    }
+
+    public Veterinario getVet() {
+        return vet;
+    }
+
+    public void setVet(Veterinario vet) {
+        this.vet = vet;
+    }
 }

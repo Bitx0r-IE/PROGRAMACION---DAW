@@ -4,57 +4,72 @@ import Modelo.Cliente;
 import Modelo.Gato;
 import Modelo.Perro;
 import Modelo.Veterinario;
+import Excepciones.*;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
+    private static ArrayList<Veterinario> listaVeterinarios;
+
     public static void main(String[] args) {
         try {
-            do {
-
-            }
-            while (JOptionPane.showConfirmDialog(null, "¿Quiere continuar?")==0);
+            guardarDatos();
+        }
+        catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Has decido salir del programa");
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "ERROR: " + e.getClass());
         }
     }
-    public static ArrayList<Cliente> listaClientes(){
-        ArrayList<Cliente> listado = new ArrayList<>();
-        //Crear clientes:
-        listado.add(new Cliente("c1", "dir1", 111111111));
-        listado.add(new Cliente("c2", "dir2", 222222222));
-        listado.add(new Cliente("c3", "dir3", 333333333));
-        return listado;
+    public static void guardarDatos(){
+        //Pedir datos para crear clientes, veterinarios, gatos y perros:
+        guardarVet();
     }
-    public static ArrayList<Gato> listaGatos(){
-        ArrayList<Gato> lista = new ArrayList<>();
-        //Crear gatos:
-        lista.add(new Gato("Maine Coon", "g1", LocalDate.of(2016,1,23), "macho", 7, "largo",
-                true, " ", false));
-        lista.add(new Gato("Siames", "g1", LocalDate.of(2010,5,2), "hembra", 5, "corto",
-                true, "alergia", true));
-        lista.add(new Gato("Azul ruso", "g3", LocalDate.of(2018,7,14), "hembra", 6, "corto",
-                true, " ", true));
-        return lista;
+    public static String solicitarDato(String dato, String mensaje, String exp){
+        String variable = "";
+        boolean error = true;
+        while (error){
+            try {
+                variable = JOptionPane.showInputDialog(mensaje);
+                if(variable.isEmpty()){
+                    throw new DatoNoValido(dato + " es un campo obligatorio");
+                }
+                Pattern pat = Pattern.compile(exp);
+                Matcher mat = pat.matcher(variable);
+                if (!mat.matches()){
+                    throw new DatoNoValido(dato + " no tiene un formato adecuado");
+                }
+            }
+            catch (DatoNoValido e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            error = false;
+        }
+        return variable;
     }
-    public static ArrayList<Perro> listaPerros(){
-        ArrayList<Perro> lista = new ArrayList<>();
-        lista.add(new Perro("Labrador", "p1", LocalDate.of(2009,8,23), "macho", 33, "corto",
-                false, "artritis", true));
-        lista.add(new Perro("Border Collie", "p2", LocalDate.of(2015,3,12), "hembra", 33, "largo",
-                true, " ", true));
-        lista.add(new Perro("Labrador", "p3", LocalDate.of(2009,8,23), "macho", 33, "corto",
-                false, "artritis", true));
-        return lista;
+    public static void guardarVet(){
+        boolean continuar = true;
+        listaVeterinarios = new ArrayList<>();
+        while(continuar){
+            listaVeterinarios.add(new Veterinario(
+                    solicitarDato("Nombre", "Teclea el nombre del veterianrio","^C/ [A-Z][a-z]+([ ][A-Z][a-z]+)* [0-9]{1,3} [0-9][a-zA-Z]$"),
+                    solicitarDato("Dirección", "Teclea la dirección","^[6789][0-9]{8}$"),
+                    solicitarDato("Teléfono", "Teclea el teléfono","^[6789][0-9]{8}$"),
+                    solicitarDato("DNI","Teclea el DNI","^[0-9]{8}[A-Za-z]$"),
+                    solicitarDato("Número de la seguridad social","Teclea el número de la seguridad social","^01 [0-9]{8} [0-9]{2}$")));
+
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Hay más veterinarios?");
+            if(respuesta != 0){
+                continuar = false;
+            }
+        }
     }
-    public static ArrayList<Veterinario> listaVeterinario(){
-        ArrayList<Veterinario> lista = new ArrayList<>();
-        lista.add(new Veterinario("v1", "dir4", 444444444, "11111111A", 2222222));
-        lista.add(new Veterinario("v2", "dir5", 555555555, "22222222B", 3333333));
-        return lista;
-    }
+
 }
