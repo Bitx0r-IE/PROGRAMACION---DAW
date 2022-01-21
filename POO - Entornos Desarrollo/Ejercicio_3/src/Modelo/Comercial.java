@@ -1,28 +1,31 @@
 package Modelo;
 
 public class Comercial extends Empleados{
-    private String zona;
+    private double comercial;
 
     //Constructor:
 
-    public Comercial(String nombre, int edad, int salario, String zona) {
+
+    public Comercial(String nombre, int edad, int salario, double comercial) {
         super(nombre, edad, salario);
-        this.zona = zona;
+        this.comercial = comercial;
     }
 
     //set y get:
-    public String getZona() {
-        return zona;
+
+    public double getComercial() {
+        return comercial;
     }
 
-    public void setZona(String zona) {
-        this.zona = zona;
+    public void setComercial(double comercial) {
+        this.comercial = comercial;
     }
 
     @Override
     public String toString() {
         return "Comercial{" +
-                "zona='" + zona + '\'' +
+                "comercial=" + comercial +
                 '}';
     }
+
 }

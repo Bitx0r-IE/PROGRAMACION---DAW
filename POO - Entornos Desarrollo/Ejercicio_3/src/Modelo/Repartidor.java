@@ -1,28 +1,30 @@
 package Modelo;
 
 public class Repartidor extends Empleados{
-    private double comision;
+    private String zona;
 
     //Constructor:
 
-    public Repartidor(String nombre, int edad, int salario, double comision) {
+    public Repartidor(String nombre, int edad, int salario, String zona) {
         super(nombre, edad, salario);
-        this.comision = comision;
+        this.zona = zona;
     }
 
     //set y get:
-    public double getComision() {
-        return comision;
+
+    public String getZona() {
+        return zona;
     }
 
-    public void setComision(double comision) {
-        this.comision = comision;
+    public void setZona(String zona) {
+        this.zona = zona;
     }
 
     @Override
     public String toString() {
         return "Repartidor{" +
-                "comision=" + comision +
+                "zona='" + zona + '\'' +
                 '}';
     }
+
 }
