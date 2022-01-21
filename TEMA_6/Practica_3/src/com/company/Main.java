@@ -34,6 +34,8 @@ public class Main {
         //Pedir datos para crear clientes, veterinarios, gatos y perros:
         JOptionPane.showMessageDialog(null, "Introducir datos del verinario/s");
         guardarVet();
+        JOptionPane.showMessageDialog(null, "Introducir datos del cliente/s");
+        guardarClientes();
         JOptionPane.showMessageDialog(null, "Introducir datos de la mascota");
         guardarClientes();
     }
@@ -100,6 +102,7 @@ public class Main {
         }
     }
     public static void guardarClientes(){
+        //pedir datos de cliente, tras pedir datos de mascota, al realizar la relación con el dueño se selecciona una ya creado:
         boolean continuar = true;
         lisaClientes = new ArrayList<>();
         while (continuar){
@@ -131,6 +134,7 @@ public class Main {
                 }
                 else{
                     if(tipo.equalsIgnoreCase("gato")){
+                        //¿Fecha con con un?
                         listaMascotas.add(new Gato(
                                 solicitarDato("Raza","Teclea la raza de la mascota","^[A-Z][a-z]+([ ][A-Z][a-z]+)*$"),
                                 solicitarDato("Nombre","Teclea el nombre de la mascota","^[A-Z][a-z]+([ ][A-Z][a-z]+)*$"),
@@ -143,11 +147,73 @@ public class Main {
                 }
             }
         }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, "ERROR: ");
+        catch (DatoNoValido e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    public static void datosDueño(){
+        //pedir los datos del dueño, en la lista de clientes y hacer la relacion entre dueño y mascota
+    }
+    public static void datosVet(Mascota m){
+        //pedir datos veterinario, pedidos con anterioridad y hacer la relacion entre vet y mascota
+        boolean error = true;
+        int x = 0;
+        while (error){
+            try {
+                String nombre = solicitarDato("Nombre", "Nombre del veterinario", "^[A-Z][a-z]+([ ][A-Z][a-z]+)*$");
+                for (x = 0; x < listaVeterinarios.size() && listaVeterinarios.get(x).getNombre().compareToIgnoreCase(nombre)!=0;x++){
+                }
+                if (x == listaVeterinarios.size())
+                    throw new DatoNoValido("No hay ningún veterinarion con ese nombre");
+                error = false;
+            }
+            catch (DatoNoValido e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            //Realcion mascota - vet:
+            listaVeterinarios.get(x).setMascota(m);
+            return listaVeterinarios.get(x);
         }
     }
     public static void mostrarMenu(){
+        //Menu de selección de opciones
+        int opcion = 0;
+        do {
+            try {
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "1.- Mostrar el nÃºmero de clientes que poseen un tipo de animal concreto.\n" +
+                        "2 - Datos personales del cliente a partir del nombre de mascota.\n" +
+                        "3- Datos del veterinario a partir de los datos de una mascota.\n" +
+                        "4- Datos de las mascotas de un cliente.\n" +
+                        "5- Datos de las mascotas de un veterinario.\n" +
+                        "6- Terminar.\n"));
+                switch (opcion) {
+                    case 1:
+                        //opcion1();
+                        break;
+                    case 2:
+                        //opcion2();
+                        break;
+                    case 3:
+                        //opcion3();
+                        break;
+                    case 4:
+                        //opcion4();
+                        break;
+                    case 5:
+                        //opcion5();
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        throw new DatoNoValido("La opciÃ³n elegida no existe");
 
+                }
+            } catch (DatoNoValido e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
+        }
+        while (opcion != 6);
     }
+
 }
