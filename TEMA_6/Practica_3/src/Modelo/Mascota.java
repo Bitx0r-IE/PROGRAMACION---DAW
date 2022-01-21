@@ -1,11 +1,9 @@
 package Modelo;
 
-import java.time.LocalDate;
-
 public class Mascota {
     private String raza;
     private String nombre;
-    private LocalDate fecha_nac;
+    private String fecha_nac;
     private String sexo;
     private float peso;
     private String tipoPelo;
@@ -14,7 +12,7 @@ public class Mascota {
     private Veterinario vet;
 
     //Constructor:
-    public Mascota(String raza, String nombre, LocalDate fecha_nac, String sexo, float peso, String tipoPelo) {
+    public Mascota(String raza, String nombre, String fecha_nac, String sexo, float peso, String tipoPelo) {
         this.raza = raza;
         this.nombre = nombre;
         this.fecha_nac = fecha_nac;
@@ -41,11 +39,11 @@ public class Mascota {
         this.nombre = nombre;
     }
 
-    public LocalDate getFecha_nac() {
+    public String getFecha_nac() {
         return fecha_nac;
     }
 
-    public void setFecha_nac(LocalDate fecha_nac) {
+    public void setFecha_nac(String fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
 
