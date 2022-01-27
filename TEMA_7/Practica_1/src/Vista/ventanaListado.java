@@ -19,46 +19,74 @@ public class ventanaListado {
     private JLabel lDNI;
     private JPanel Panel;
 
+    //Main:
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("ventanaListado");
+        frame.setContentPane(new ventanaListado().Panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    //set y get:
+
+    public JPanel getPanel() {
+        return Panel;
+    }
+
+    public void setPanel(JPanel panel) {
+        Panel = panel;
+    }
+
     //Acciones
     public ventanaListado() {
         bAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fClick();
+                fAccept();
             }
         });
         bSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                System.exit(0);
             }
         });
     }
-    public void fClick(){
-        boolean continuar = true;
-        while (continuar){
-            try {
-                if(tNombre.getText().isEmpty() || tApellidos.getText().isEmpty() || tDNI.getText().isEmpty()){
-                    throw new DatoNoValido("Campo obligatorio sin rellenar");
-                }
-                else{
-                    continuar = false;
-                    Main.tenDatos(tNombre.getText(), tApellidos.getText(), tDNI.getText());
-                }
-            }
-            catch (DatoNoValido e){
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
+
+    public void fAccept() {
+        if (validar()) {
+            Main.crearPerso(tNombre.getText(), tApellidos.getText(), tDNI.getText());
+            inicializar();
         }
     }
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("ventanaListado");
-        frame.setContentPane(new ventanaListado().Panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+
+    public boolean validar() {
+        try {
+            if (tNombre.getText().isEmpty()) {
+                throw new DatoNoValido("Campo obligatorio sin rellenar");
+            }
+            if (tApellidos.getText().isEmpty()) {
+                throw new DatoNoValido("Campo obligatorio sin rellenar");
+            }
+            if (tDNI.getText().isEmpty()) {
+                throw new DatoNoValido("Campo obligatorio sin rellenar");
+            }
+        } catch (DatoNoValido e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return true;
     }
 
+    public void inicializar(){
+        //retornar la ventana a su estado original:
+        tNombre.setText("");
+        tApellidos.setText("");
+        tDNI.setText("");
+        tNombre.requestFocus();
+    }
 }
 
 
