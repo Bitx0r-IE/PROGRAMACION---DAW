@@ -11,7 +11,7 @@ public class Main {
     private static ArrayList<Persona> listaPersonas;
     private static ArrayList<String> listaCursos;
     //ventanas:
-    private static JFrame V1, V2;
+    private static JFrame V1;
 
     public static void main(String[] args) {
         //Base datos:
@@ -65,6 +65,7 @@ public class Main {
     }
 
     public static boolean comprobarDNI(String text){
+        //Comprobar si el DNI introducido existe en la tabla de personas:
         if (listaPersonas.contains(text)){
          return true;
         }
