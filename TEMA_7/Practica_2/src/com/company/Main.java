@@ -32,6 +32,7 @@ public class Main {
 
     public static void cursos(){
         //Rellenar la lista de cursos con todas las opciones:
+        listaCursos = new ArrayList<>();
         //1º:
         listaCursos.add("1A");
         listaCursos.add("1B");
