@@ -30,7 +30,7 @@ public class Main {
         listaPerso.add(new Persona(text, tApellidosText, tDNIText));
     }
 
-    public void getDatos(){
+    public static void getDatos(){
         //Crear el String de datos para la segunda ventana:
         String datos = "";
         for (Persona persona: listaPerso){

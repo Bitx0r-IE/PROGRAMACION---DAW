@@ -49,9 +49,10 @@ public class ventanaListado {
             }
         });
         bSalir.addActionListener(new ActionListener() {
+            //No es salir del programa, sino finalizar la inserción de texto
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                Main.getDatos();
             }
         });
     }
