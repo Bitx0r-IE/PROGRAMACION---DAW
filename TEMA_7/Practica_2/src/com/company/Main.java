@@ -74,7 +74,7 @@ public class Main {
         }
     }
 
-    public static void modificar(){
-
+    public static void cuadroDialogo(){
+        JOptionPane.showMessageDialog(null, "Si queire cambiar datos");
     }
 }

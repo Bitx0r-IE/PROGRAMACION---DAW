@@ -43,6 +43,12 @@ public class V1 {
                 bAceptar.doClick();//fAccept()
             }
         });
+        tDNI.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bAceptar.doClick();
+            }
+        });
     }
 
     public static void main(String[] args) {
