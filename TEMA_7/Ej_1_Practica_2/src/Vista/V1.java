@@ -1,5 +1,7 @@
 package Vista;
 
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,21 +47,69 @@ public class V1 {
 
     //set y get (panel)
 
+
     public JPanel getPanelPrincipal() {
-        return pTitulo;
+        return PanelPrincipal;
     }
 
-    public void setPanelPrincipal(JPanel pTitulo) {
-        this.PanelPrincipal = PanelPrincipal;
+    public void setPanelPrincipal(JPanel panelPrincipal) {
+        PanelPrincipal = panelPrincipal;
     }
 
+    public JPanel getpDatosCompra() {
+        return pDatosCompra;
+    }
+
+    public void setpDatosCompra(JPanel pDatosCompra) {
+        this.pDatosCompra = pDatosCompra;
+    }
+
+    public JPanel getpDatosVenta() {
+        return pDatosVenta;
+    }
+
+    public void setpDatosVenta(JPanel pDatosVenta) {
+        this.pDatosVenta = pDatosVenta;
+    }
+
+    public JTextField getTfNombreProd() {
+        return tfNombreProd;
+    }
+
+    public void setTfNombreProd(JTextField tfNombreProd) {
+        this.tfNombreProd = tfNombreProd;
+    }
+
+    public JTextField getTfUnidades() {
+        return tfUnidades;
+    }
+
+    public void setTfUnidades(JTextField tfUnidades) {
+        this.tfUnidades = tfUnidades;
+    }
+
+    public JComboBox getCbProveedor() {
+        return cbProveedor;
+    }
+
+    public void setCbProveedor(JComboBox cbProveedor) {
+        this.cbProveedor = cbProveedor;
+    }
+
+    public JTextField getTfCliente() {
+        return tfCliente;
+    }
+
+    public void setTfCliente(JTextField tfCliente) {
+        this.tfCliente = tfCliente;
+    }
     //Acciones:
 
     public V1() {
         bAcepar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                resetVentana();
             }
         });
         bCancelar.addActionListener(new ActionListener() {
@@ -68,24 +118,57 @@ public class V1 {
                 System.exit(0);
             }
         });
-        tfImporteVenta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                bAcepar.doClick();
-            }
-        });
         tfNombreProd.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
+                Main.validarProd(getTfNombreProd());
             }
         });
         tfUnidades.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
+                Main.validarUnidades(getTfUnidades());
             }
         });
+        rbCompra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                compraVisible();
+            }
+        });
+        rbVenta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ventaVisible();
+            }
+        });
+        cbPorVolumen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.porVolumen();
+            }
+        });
+        cbProntoPago.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.prontoPago();
+            }
+        });
+    }
+    public void compraVisible(){
+        pDatosVenta.setVisible(false);
+        pDatosCompra.setVisible(true);
+    }
+    public void ventaVisible(){
+        pDatosCompra.setVisible(false);
+        pDatosVenta.setVisible(true);
+    }
+    public void resetVentana(){
+        pDatosVenta.setVisible(true);
+        pDatosVenta.setVisible(true);
+        setPanelPrincipal(null);
     }
 }
 
