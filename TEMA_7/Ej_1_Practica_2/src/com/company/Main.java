@@ -17,6 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         inicializar();
+        llenarComboBox(getCbProveedor());
         mostrarVentana();
     }
     public static void inicializar(){
@@ -41,6 +42,12 @@ public class Main {
         listaProv.add(new Proveedor("Alejandra"));
         listaProv.add(new Proveedor("Adolfo"));
         listaProv.add(new Proveedor("Lorena"));
+        //Llenar el combobox de la ventana principal con el arraylist:
+    }
+    public static void llenarComboBox(JComboBox cbProveedor){
+        for (int x = 0; x < listaProv.size(); x++){
+            cbProveedor.add(listaProv.getClass(x));
+        }
     }
     public static void  mostrarVentana(){
         //Copia pega del main de la vista v1:
@@ -54,7 +61,7 @@ public class Main {
     public static void validarProd(JTextField tfNombreProd){
         try {
             if (listaProd.contains(tfNombreProd)){
-                tfNombreProd.setBackground(Color.BLUE);
+                tfNombreProd.setBackground(Color.GREEN);
             }
             else{
                 tfNombreProd.setBackground(Color.RED);
@@ -68,11 +75,11 @@ public class Main {
     public static void validarUnidades(JTextField tfUnidades) {
         try {
             if (listaProd.contains(tfUnidades)){
-                tfUnidades.setBackground(Color.BLUE);
+                tfUnidades.setBackground(Color.GREEN);
             }
             else{
                 tfUnidades.setBackground(Color.RED);
-                throw new DatoNoValido("Producto no valido");
+                throw new DatoNoValido("Unidades no validas");
             }
         }
         catch (DatoNoValido e){

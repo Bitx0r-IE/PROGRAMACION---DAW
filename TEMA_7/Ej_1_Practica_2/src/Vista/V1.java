@@ -157,6 +157,9 @@ public class V1 {
             }
         });
     }
+    public void llenarCB(){
+        Main.llenarComboBox(getCbProveedor());
+    }
     public void compraVisible(){
         pDatosVenta.setVisible(false);
         pDatosCompra.setVisible(true);
