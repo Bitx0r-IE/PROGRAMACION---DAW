@@ -1,33 +1,34 @@
 package com.company;
 
-import Excepciones.DatoNoValido;
 import Vista.V1;
 import Modelo.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Main {
 
     private static JFrame V1;
-    private static ArrayList<Producto> listaProd;
     private static ArrayList<Cliente> listaCliente;
-    private static ArrayList<Proveedor> listaProv;
+    private static Proveedor[] listaProveedor;
+    private static Producto[] listaProd;
+
+    private static Producto oProducto;
+    private static Proveedor oProveedor;
+    private static Cliente oCliente;
 
     public static void main(String[] args) {
         inicializar();
-        llenarComboBox(getCbProveedor());
         mostrarVentana();
     }
     public static void inicializar(){
-        listaProd = new ArrayList<>();
+        listaProd = new Producto[5];
         //Crear lista productos:
-        listaProd.add(new Producto("p1", "5", "3"));
-        listaProd.add(new Producto("p2", "7", "6"));
-        listaProd.add(new Producto("p3", "9", "12"));
-        listaProd.add(new Producto("p4", "6", "2"));
-        listaProd.add(new Producto("p5", "11", "15"));
+        listaProd[0] =(new Producto("p1", 5, 3.45f));
+        listaProd[1] = (new Producto("p2", 7, 6.34f));
+        listaProd[2] = (new Producto("p3", 9, 12.1f));
+        listaProd[3] = (new Producto("p4", 6, 2.65f));
+        listaProd[4] = (new Producto("p5", 11, 13.55f));
 
         listaCliente = new ArrayList<>();
         //Crear clientes:
@@ -36,18 +37,29 @@ public class Main {
         listaCliente.add(new Cliente("Maria"));
         listaCliente.add(new Cliente("Elena"));
 
-        listaProv = new ArrayList<>();
+        listaProveedor = new Proveedor[4];
         //Crear proveedores:
-        listaProv.add(new Proveedor("Manolo"));
-        listaProv.add(new Proveedor("Alejandra"));
-        listaProv.add(new Proveedor("Adolfo"));
-        listaProv.add(new Proveedor("Lorena"));
-        //Llenar el combobox de la ventana principal con el arraylist:
-    }
-    public static void llenarComboBox(JComboBox cbProveedor){
-        for (int x = 0; x < listaProv.size(); x++){
-            cbProveedor.add(listaProv.getClass(x));
-        }
+        listaProveedor[0] = new Proveedor("Manolo");
+        listaProveedor[1] = new Proveedor("Alejandra");
+        listaProveedor[2] = new Proveedor("Adolfo");
+        listaProveedor[3] = new Proveedor("Lorena");
+
+        //Relaciones entre producto y proveedor:
+        listaProd[0].setListaProveedor(listaProveedor[1]);
+        listaProd[2].setListaProveedor(listaProveedor[1]);
+        listaProd[1].setListaProveedor(listaProveedor[1]);
+
+        listaProd[4].setListaProveedor(listaProveedor[2]);
+        listaProd[1].setListaProveedor(listaProveedor[2]);
+
+        listaProd[3].setListaProveedor(listaProveedor[3]);
+        listaProd[3].setListaProveedor(listaProveedor[3]);
+
+        listaProd[2].setListaProveedor(listaProveedor[0]);
+        listaProd[4].setListaProveedor(listaProveedor[0]);
+
+        listaProd[3].setListaProveedor(listaProveedor[3]);
+        listaProd[3].setListaProveedor(listaProveedor[2]);
     }
     public static void  mostrarVentana(){
         //Copia pega del main de la vista v1:
@@ -58,39 +70,46 @@ public class Main {
         V1.pack();
         V1.setVisible(true);
     }
-    public static void validarProd(JTextField tfNombreProd){
-        try {
-            if (listaProd.contains(tfNombreProd)){
-                tfNombreProd.setBackground(Color.GREEN);
-            }
-            else{
-                tfNombreProd.setBackground(Color.RED);
-                throw new DatoNoValido("Producto no valido");
-            }
+    public static boolean buscarProd(String nombre){
+        int x;
+        for (x = 0; x < listaProd.length && listaProd[x].getNombre().compareToIgnoreCase(nombre) != 0; x++){}
+        if (x == listaProd.length){
+            oProducto = null;
+            return false;
         }
-        catch (DatoNoValido e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        else{
+            oProducto = listaProd[x];
+            return true;
         }
     }
-    public static void validarUnidades(JTextField tfUnidades) {
-        try {
-            if (listaProd.contains(tfUnidades)){
-                tfUnidades.setBackground(Color.GREEN);
-            }
-            else{
-                tfUnidades.setBackground(Color.RED);
-                throw new DatoNoValido("Unidades no validas");
-            }
+    public static void buscarCliente(String nombre){
+        int x;
+        for (x = 0; x < listaCliente.size() && listaCliente.get(x).getNombre().compareToIgnoreCase(nombre) != 0; x++){}
+        if (x == listaCliente.size()){
+            oCliente = new Cliente(nombre);
         }
-        catch (DatoNoValido e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        else {
+            oCliente = listaCliente.get(x);
         }
     }
-    public static void porVolumen(){
-
+    public static boolean buscarUnidades(int u){
+        return oProducto.getNumUnidades() >= u;
     }
-    public static void prontoPago(){
-
+    public static String getPrecio(){
+        return String.valueOf(oProducto.getPrecioVenta());
+    }
+    public static String[] getDatosProveedores(){
+        //Array para llenar la combobox de proveedores:
+        String[] nombreProv = new String[oProducto.getListaProveedor().size()];
+        for ()
+    }
+    public static void guardarVenta(String unidades){
+        oProducto.venderUnidades(Integer.parseInt(unidades));
+        oCliente.setProducto(oProducto);
+    }
+    public static void limpiar(){
+        V1.dispose();
+        mostrarVentana();
     }
 
 

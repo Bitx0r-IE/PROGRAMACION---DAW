@@ -1,12 +1,17 @@
 package Vista;
 
+import Excepciones.DatoNoValido;
+import Modelo.Producto;
 import com.company.Main;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class V1 {
     private JPanel pTitulo;
@@ -35,6 +40,17 @@ public class V1 {
     private JButton bAcepar;
     private JButton bCancelar;
     private JTextField tfImporte;
+
+    // Validaciones
+    private boolean prodCorrecto;
+    private boolean unidadesCorrectas;
+    private boolean precioCompraCorrecto;
+    private boolean nombreClienteCorrecto;
+
+    private final  int DTOPP = 3;
+    private final  int DTOV = 2;
+    private Float importeVenta;
+
 
     //main:
     public static void main(String[] args) {
@@ -122,26 +138,29 @@ public class V1 {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                Main.validarProd(getTfNombreProd());
+                //Validar nombre del producto:
+                prodCorrecto = validarProd();
             }
         });
         tfUnidades.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                Main.validarUnidades(getTfUnidades());
+                if (prodCorrecto){
+                    unidadesCorrectas = validarUnidades();
+                }
             }
         });
         rbCompra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                compraVisible();
+                compra();
             }
         });
         rbVenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ventaVisible();
+                venta();
             }
         });
         cbPorVolumen.addActionListener(new ActionListener() {
@@ -157,14 +176,56 @@ public class V1 {
             }
         });
     }
-    public void llenarCB(){
-        Main.llenarComboBox(getCbProveedor());
+    public boolean validarProd(){
+        try{
+            String producto = tfNombreProd.getText();
+            if (producto.isEmpty()){
+                throw new DatoNoValido("Nombre del producto es un campo obligatorio");
+            }
+            //Posibilidade de introducir un patrón
+            if (!Main.buscarProd(producto)){
+                throw new DatoNoValido("El producto que buscas no existe");
+            }
+            tfNombreProd.setEditable(false);
+        }
+        catch (DatoNoValido e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            tfNombreProd.setSelectionStart(0);
+            tfNombreProd.setSelectionEnd(tfNombreProd.getText().length());
+            tfNombreProd.requestFocus();
+            return false;
+        }
+        return true;
     }
-    public void compraVisible(){
+    public boolean validarUnidades(){
+        try{
+            String precio = tfUnidades.getText();
+            if (precio.isEmpty()){
+                throw new DatoNoValido("Campo obligatorio unidades sin rellenar");
+            }
+            Pattern patron = Pattern.compile("[0-9]+([.][0-9]*)?$");
+            Matcher m = patron.matcher(precio);
+            if (!m.matches()){
+                throw new DatoNoValido("El precio debe ser un dato NUMÉRICO");
+            }
+            if (Float.parseFloat(precio) <= 0){
+                throw new DatoNoValido("El precio debe ser mayor que 0");
+            }
+        }catch (DatoNoValido e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            tfUnidades.setSelectionStart(0);
+            tfUnidades.setSelectionEnd(tfUnidades.getText().length());
+            tfUnidades.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    public void compra(){
         pDatosVenta.setVisible(false);
         pDatosCompra.setVisible(true);
+        llenarComboBox(Main.getDatosProveedores());
     }
-    public void ventaVisible(){
+    public void venta(){
         pDatosCompra.setVisible(false);
         pDatosVenta.setVisible(true);
     }

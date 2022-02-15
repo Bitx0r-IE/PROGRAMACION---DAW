@@ -1,41 +1,73 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Producto {
     private String nombre;
-    private String numUnidades;
-    private String precioUnitario;
+    private Integer numUnidades;
+    private Float precioUnitario;
+    private ArrayList<Proveedor> listaProveedor;
+
+    public ArrayList<Proveedor> getListaProveedor() {
+        return listaProveedor;
+    }
+
+    public void setListaProveedor(Proveedor p) {
+        this.listaProveedor.add(p);
+    }
 
     //Constructor:
 
-    public Producto(String nombre, String numUnidades, String precioUnitario) {
-        this.nombre = nombre;
-        this.numUnidades = numUnidades;
-        this.precioUnitario = precioUnitario;
+    public Producto(String n, Integer u, Float p) {
+        this.nombre = n;
+        this.numUnidades = u;
+        this.precioUnitario = p;
+        listaProveedor = new ArrayList<>();
     }
 
+
     //set y get:
+
+    public void setNombre(String n) {
+        nombre = n;
+    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNumUnidades() {
+    public Integer getNumUnidades() {
         return numUnidades;
     }
 
-    public void setNumUnidades(String numUnidades) {
-        this.numUnidades = numUnidades;
+    public void setPrecioUnitario(Float p){
+        precioUnitario = p;
     }
 
-    public String getPrecioUnitario() {
+    public void setNumUnidades(Integer u) {
+        numUnidades = u;
+    }
+
+    public Float getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(String precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void comprarUnidades(Integer u, Float p){
+        setNuevoPrecio(u,p);
+        numUnidades = numUnidades + u;
     }
+    public void venderUnidades(Integer u){
+        numUnidades = numUnidades - u;
+    }
+    public void setNuevoPrecio(int numUnidades, float p){
+        precioUnitario = ((this.numUnidades * precioUnitario) + (numUnidades * p))/(this.numUnidades + numUnidades);
+    }
+    public Float getPrecio(){
+        return precioUnitario;
+    }
+    public Float getPrecioVenta(){
+        return precioUnitario * 2;
+    }
+
+
 }
