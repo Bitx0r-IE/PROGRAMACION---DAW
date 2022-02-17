@@ -95,22 +95,28 @@ public class Main {
     public static boolean buscarUnidades(int u){
         return oProducto.getNumUnidades() >= u;
     }
-    public static String getPrecio(){
-        return String.valueOf(oProducto.getPrecioVenta());
-    }
     public static String[] getDatosProveedores(){
         //Array para llenar la combobox de proveedores:
         String[] nombreProv = new String[oProducto.getListaProveedor().size()];
-        for ()
+        for (int x = 0; x < oProducto.getListaProveedor().size(); x++)
+            nombreProv[x] = oProducto.getListaProveedor().get(x).getNombre();
+            return nombreProv;
+    }
+    public static void guardarCompra(String text, String tfPrecioCompraText){
+        oProducto.comprarUnidades(Integer.parseInt(text), Float.parseFloat(tfPrecioCompraText));
     }
     public static void guardarVenta(String unidades){
         oProducto.venderUnidades(Integer.parseInt(unidades));
         oCliente.setProducto(oProducto);
     }
+    public static boolean hayUnidades(int u){
+        return oProducto.getNumUnidades() >= u;
+    }
+    public static String getPrecio(){
+        return String.valueOf(oProducto.getPrecioVenta());
+    }
     public static void limpiar(){
         V1.dispose();
         mostrarVentana();
     }
-
-
 }
