@@ -20,4 +20,5 @@ public class V2 {
     private JButton b5;
     private JButton b8;
     private JButton b6;
+    private JButton bEntrar;
 }
