@@ -25,7 +25,6 @@ public class V1 {
             }
         });
     }
-
     //getter de pPrincipal:
 
     public JPanel getpPrincipal() {

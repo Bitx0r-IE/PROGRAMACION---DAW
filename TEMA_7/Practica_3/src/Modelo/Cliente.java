@@ -1,10 +1,13 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Cliente {
     private String dni;
     private String nombreApellidos;
     private int clave;
 
+    private ArrayList<Cuenta> listaCuentas;
     //Constructor:
 
     public Cliente(String dni, String nombreApellidos, int clave) {

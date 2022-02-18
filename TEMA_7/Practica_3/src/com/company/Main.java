@@ -3,6 +3,7 @@ package com.company;
 import Modelo.Cliente;
 import Modelo.Cuenta;
 import Vista.V1;
+import jdk.nashorn.internal.scripts.JO;
 import oracle.jrockit.jfr.JFR;
 
 import javax.swing.*;
@@ -17,16 +18,26 @@ public class Main {
     public static JFrame V2;
 
     public static void main(String[] args) {
-	    inicializar();
-        mostrarVentanaPrincipal();
+	    try {
+            inicializar();
+            mostrarVentanaPrincipal();
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getClass());
+        }
     }
     public static void mostrarVentanaPrincipal(){
+        //copia pega del main de V1.java
         V1 = new JFrame("V1");
         V1.setContentPane(new V1().getpPrincipal());
         V1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         V1.setLocationRelativeTo(null);//centrar ventana
         V1.pack();
         V1.setVisible(true);
+    }
+    public static void mostrarVentantaV2(){
+        V1.dispose();
+        //copia pega del main de V2.java
     }
     public static void inicializar(){
         //Clientes:

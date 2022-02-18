@@ -1,14 +1,16 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Cuenta {
     private String numero;
-    private float saldo;
 
+    private ArrayList<Movimiento> listaMovimientos;
     //Constructor:
 
-    public Cuenta(String numero, float saldo) {
+    public Cuenta(String numero) {
         this.numero = numero;
-        this.saldo = saldo;
+
     }
 
     //get y set:
@@ -21,11 +23,4 @@ public class Cuenta {
         this.numero = numero;
     }
 
-    public float getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(float saldo) {
-        this.saldo = saldo;
-    }
 }
