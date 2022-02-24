@@ -12,9 +12,9 @@ public class V1 {
     private JPanel pPrincipal;
     private JLabel lAcceso;
     private JButton bAcceso;
-    private JLabel ImageLog;
     private JPanel pAcceso;
     private JPanel pImagen;
+    private JButton bImagen;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("V1");
@@ -31,8 +31,6 @@ public class V1 {
 
             }
         });
-        ImageIcon imagen = new ImageIcon("sith.lord-png");
-        ImageLog.setIcon(imagen);
     }
     //getter de pPrincipal:
 
