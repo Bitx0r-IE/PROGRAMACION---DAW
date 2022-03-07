@@ -3,8 +3,6 @@ package com.company;
 import Modelo.Cliente;
 import Modelo.Cuenta;
 import Vista.V1;
-import jdk.nashorn.internal.scripts.JO;
-import oracle.jrockit.jfr.JFR;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -36,13 +34,19 @@ public class Main {
         V1.setVisible(true);
     }
     public static void mostrarVentantaV2(){
-        V1.dispose();
         //copia pega del main de V2.java
+    }
+    public static void mostrarVentanaV3(){
+
     }
     public static void inicializar(){
         //Clientes:
         listaClientes = new ArrayList<>();
         //Cuentas:
         listaCuentas = new ArrayList<>();
+    }
+    public static boolean buscarCliente(String text, String s){
+
+        return false;
     }
 }

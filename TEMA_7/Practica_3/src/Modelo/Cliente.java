@@ -41,4 +41,20 @@ public class Cliente {
     public void setClave(int clave) {
         this.clave = clave;
     }
+
+    public ArrayList<Cuenta> getListaCuentas() {
+        return listaCuentas;
+    }
+
+    public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
+        this.listaCuentas = listaCuentas;
+    }
+
+    public int getNumCuentas(){
+        return listaCuentas.size();
+    }
+
+    public Cuenta getCuenta(int x){
+        return listaCuentas.get(x);
+    }
 }
