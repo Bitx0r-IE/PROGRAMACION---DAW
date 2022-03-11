@@ -1,6 +1,8 @@
 package Vista;
 
 import Excepciones.DatoNoValido;
+import Modelo.BD.Base_Datos;
+import Modelo.BD.PersonaDAO;
 import com.company.Main;
 
 import javax.swing.*;
@@ -40,9 +42,9 @@ public class V2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Main.cerrarBD();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    Base_Datos.cerrarBD();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         });
@@ -51,9 +53,10 @@ public class V2 {
             public void actionPerformed(ActionEvent e) {
                 if (validar() ==true){
                     try {
-                        Main.crearPerso(tfEdad.getText(), tfNombre.getText(), tfProfesion.getText(), tfTelefono.getText());
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
+                        PersonaDAO.crearPerso(tfEdad.getText(), tfNombre.getText(), tfProfesion.getText(),
+                                            tfTelefono.getText());
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
                 }
             }

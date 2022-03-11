@@ -1,14 +1,14 @@
-package Modelo;
+package Modelo.UML;
 
 public class Persona {
     String nombre;
-    int edad;
+    String edad;
     String profesion;
-    int telefono;
+    String telefono;
 
     //Constructor:
 
-    public Persona(String nombre, int edad, String profesion, int telefono) {
+    public Persona(String nombre, String edad, String profesion, String telefono) {
         this.nombre = nombre;
         this.edad = edad;
         this.profesion = profesion;
@@ -25,11 +25,11 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 
@@ -41,11 +41,11 @@ public class Persona {
         this.profesion = profesion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 }

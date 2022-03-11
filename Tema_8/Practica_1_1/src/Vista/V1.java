@@ -1,5 +1,9 @@
 package Vista;
 
+import Excepciones.DatoNoValido;
+import Modelo.BD.Base_Datos;
+import Modelo.BD.PersonaDAO;
+import Modelo.UML.Persona;
 import com.company.Main;
 
 import javax.swing.*;
@@ -25,9 +29,11 @@ public class V1 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    comprabarOpcion();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    comprobarOpcion();
+                } catch (DatoNoValido a) {
+                    JOptionPane.showMessageDialog(null, a.getMessage());
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         });
@@ -52,20 +58,24 @@ public class V1 {
     }
 
     //Operaciones:
-    public void comprabarOpcion() throws SQLException {
+    public void comprobarOpcion() throws Exception {
         String opcion = tfOpcion.getText();
         switch (opcion){
             case "1":
+                PersonaDAO.opcion1();
+                break;
             case "2":
+                PersonaDAO.opcion2();
+                break;
             case "3":
-                Main.mostrarVentanaPersonas();
+                PersonaDAO.opcion3();
                 break;
             case "4":
-                Main.cerrarBD();
+                Base_Datos.cerrarBD();
                 System.exit(0);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Teclee una opción valida");
+                throw new DatoNoValido("Teclee una opción valida");
         }
     }
 }
