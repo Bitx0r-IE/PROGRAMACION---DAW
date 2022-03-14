@@ -7,13 +7,13 @@ import java.sql.SQLException;
 
 public class BaseDatos {
     //Parametros de conexión:
-    private String login = "root";
-    private String password = "usbw";
-    private String url = "jdbc:mysql://localhost:3306/practica_1_2";
+    private static String login = "root";
+    private static String password = "usbw";
+    private  static String url = "jdbc:mysql://localhost:3306/practica_1_2";
 
-    private Connection con;
+    private static Connection con;
 
-    public BaseDatos() throws Exception{
+    public static void BaseDatos() throws Exception{
         //Obtener Driver para mysql:
         Class.forName("com.mysql.cj.jdbc.Driver");
 
