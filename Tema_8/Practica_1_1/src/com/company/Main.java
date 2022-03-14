@@ -16,11 +16,13 @@ public class Main {
     private static JFrame V2;
     //Declarar conexion con la Base de Datos:
     private static Base_Datos bd;
+    private static PersonaDAO pdao;
 
     public static void main(String[] args) {
         try {
             //Iniciar base de datos:
             bd = new Base_Datos();
+            pdao = new PersonaDAO(bd.getConnection());
             //ventana principal:
             mostrarVentanaPrincipal();
         }

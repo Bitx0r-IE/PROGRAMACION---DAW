@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Base_Datos {
-    static Connection connection;
+    static Connection con;
     private String url = "jdbc:mysql://localhost:3307/practica_1";
     private String user = "root";
     private String passwd = "usbw";
@@ -18,25 +18,25 @@ public class Base_Datos {
     public Base_Datos() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        connection = DriverManager.getConnection(url, user, passwd);
+        con = DriverManager.getConnection(url, user, passwd);
 
-        if (!connection.isValid(2)){
+        if (!con.isValid(2)){
             throw new DatoNoValido("Problemas con la base de datos");
         }
     }
 
     public static void cerrarBD() throws Exception {
-        connection.close();
+        con.close();
     }
 
     //get set connection:
 
     public Connection getConnection() {
-        return connection;
+        return con;
     }
 
     public void setConnection(Connection connection) {
-        this.connection = connection;
+        this.con = connection;
     }
 
 }

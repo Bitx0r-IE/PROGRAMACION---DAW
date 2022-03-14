@@ -2,11 +2,19 @@ package Modelo.BD;
 
 import Modelo.UML.Persona;
 import com.company.Main;
-
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class PersonaDAO {
+    //Contiene los métodos que manipulan la tabla
+    //objeto de acceso a datos (en inglés, data acccess object, abreviado DAO)
+
+    private Connection con;
+
+    public PersonaDAO(Connection con) {
+        this.con = con;
+    }
 
     public static void crearPerso(String text, String tfNombreText, String tfProfesionText, String tfTelefonoText) throws Exception {
         String edad = text;
@@ -21,7 +29,7 @@ public class PersonaDAO {
         //Crear el insert de la nueva persona:
         String s = "INSERT INTO practica_1 VALUES(?, ?, ?, ?)";
         //Teoría de Prepared Statement, apuntes pg 11
-        PreparedStatement ps = conex.connection.prepareStatement(s);
+        PreparedStatement ps = conex.con.prepareStatement(s);
         //Ejecutar el insert
         ps.setString(1, persona.getNombre());
         ps.setString(2, persona.getEdad());
