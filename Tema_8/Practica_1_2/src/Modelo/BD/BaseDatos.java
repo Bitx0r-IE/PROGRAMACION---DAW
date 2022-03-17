@@ -3,7 +3,6 @@ package Modelo.BD;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class BaseDatos {
     //Parametros de conexión:
@@ -24,7 +23,7 @@ public class BaseDatos {
         }
     }
 
-    public Connection getCon() {
+    public static Connection getCon() {
         return con;
     }
 
@@ -32,7 +31,7 @@ public class BaseDatos {
         this.con = con;
     }
 
-    public void cerrarBD(){
+    public static void cerrarBD(){
         try {
             con.close();
         }
