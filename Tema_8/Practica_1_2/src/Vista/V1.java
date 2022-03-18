@@ -23,6 +23,12 @@ public class V1 {
     private JMenuItem miModificarEvento;
 
     public V1() {
+        /**
+         *Llamada al controlador, apertura ventana
+         *
+         * @author Victor Ibañez
+         * @version 18/03/2022
+         */
         miGuardarEvento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,7 +38,21 @@ public class V1 {
         miCancelarEvento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaCancelar();
+                try{
+                    String nombre = JOptionPane.showInputDialog(null, "Introduce el evento que" +
+                                                                " quieres cancelar");
+                    validarNombre(nombre);
+                    String datos = Main.calcelarEvento(nombre);
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de borrar" +
+                                                                    " de forma definitiva este evento?" + datos);
+                    if (respuesta == 0){
+                        Main.borrarEvento();
+                        JOptionPane.showMessageDialog(null, "Evento cancelado");
+                    }
+                }
+                catch (Exception a){
+                    JOptionPane.showMessageDialog(null, a.getMessage());
+                }
             }
         });
         miModificarEvento.addActionListener(new ActionListener() {
@@ -41,6 +61,12 @@ public class V1 {
 
             }
         });
+    }
+
+    public void validarNombre(String nombre) throws Exception{
+        if (nombre.isEmpty()){
+            throw new Exception("El nombre es un dato obligatorio");
+        }
     }
 
     //Main:

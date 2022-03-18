@@ -4,7 +4,6 @@ import Modelo.BD.BaseDatos;
 import Modelo.BD.EventoDAO;
 import Modelo.UML.Evento;
 import Vista.V1;
-import Vista.VCancelarEvento;
 import Vista.VGuardaEvento;
 
 import javax.swing.*;
@@ -16,6 +15,7 @@ public class Main {
     private static JFrame V1;
     private static JDialog VGuardar;
     private static JDialog VCancelar;
+    private static Evento evento;
 
     private static BaseDatos bd;
     private static EventoDAO edao;
@@ -25,8 +25,8 @@ public class Main {
     public static void main(String[] args) {
 	    try {
             //Conexión con la base de datos
-            //bd = new BaseDatos();
-            //edao = new EventoDAO(bd.getCon());
+            bd = new BaseDatos();
+            edao = new EventoDAO(bd.getCon());
             //Creació ventana menu principal:
             crearVentanaMenu();
         }
@@ -34,8 +34,20 @@ public class Main {
             System.out.println(e.getClass());
         }
     }
-    public static void getDatosEvento(String text, String tfLocText, LocalDate fecha, LocalTime horaI, LocalTime horaF, int aforo){
+    public static void getDatosEvento(String nombre, String loc, LocalDate fecha, LocalTime horaI, LocalTime horaF, int aforo) throws Exception {
+        //Crear objeto evento:
+        evento = new Evento(nombre, loc, fecha, horaI, horaF, aforo);
 
+        //Ejecutar guardado en BD:
+        EventoDAO.GuardarEvento(evento);
+    }
+    public static String calcelarEvento(String nombre) throws Exception{
+        //Consultar:
+        evento = EventoDAO.consultarAcontecimiento(nombre);
+        return evento.toString();
+    }
+    public static void borrarEvento() throws Exception{
+        EventoDAO.borrar(evento);
     }
     public static void crearVentanaMenu(){
         V1 = new JFrame("V1");
@@ -51,12 +63,5 @@ public class Main {
         VGuardar.setLocationRelativeTo(null);
         VGuardar.setVisible(true);
         VGuardar.dispose();
-    }
-    public static void abrirVentanaCancelar(){
-        VCancelar = new VCancelarEvento();
-        VCancelar.pack();
-        VCancelar.setLocationRelativeTo(null);
-        VCancelar.setVisible(true);
-        VCancelar.dispose();
     }
 }

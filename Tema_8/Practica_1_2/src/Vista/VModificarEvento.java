@@ -1,20 +1,26 @@
 package Vista;
 
-import Modelo.BD.BaseDatos;
-
 import javax.swing.*;
 import java.awt.event.*;
 
-public class VCancelarEvento extends JDialog {
+public class VModificarEvento extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField tfNombre;
-    private JTextField tfLoc;
-    private JLabel lNombre;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JTextField textField6;
+    private JLabel lAforo;
+    private JLabel lhFin;
+    private JLabel lhInicio;
+    private JLabel lFecha;
     private JLabel lLoc;
+    private JLabel lNombre;
 
-    public VCancelarEvento() {
+    public VModificarEvento() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -28,7 +34,6 @@ public class VCancelarEvento extends JDialog {
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
-                BaseDatos.cerrarBD();
             }
         });
 
@@ -59,7 +64,7 @@ public class VCancelarEvento extends JDialog {
     }
 
     public static void main(String[] args) {
-        VCancelarEvento dialog = new VCancelarEvento();
+        VModificarEvento dialog = new VModificarEvento();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

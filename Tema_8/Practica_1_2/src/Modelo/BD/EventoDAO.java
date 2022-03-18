@@ -11,12 +11,13 @@ import java.time.LocalDate;
 
 public class EventoDAO {
 
+    private static Evento evento;
     private static PreparedStatement sentenciaPrep;
     private static String plantilla;
     private static Statement sentencia;
     private static ResultSet resultado;
 
-    private static void GuardarEnvento(Evento evento) throws Exception {
+    public static void GuardarEvento(Evento evento) throws Exception {
 
         //Abrir la conexión:
         BaseDatos.BaseDatos();
@@ -48,5 +49,31 @@ public class EventoDAO {
     public static java.sql.Time conversionTime(java.time.LocalTime hora){
         //Conversión java.sql.Time en java.time.Time:
         return java.sql.Time.valueOf(hora);
+    }
+    public static Evento consultarAcontecimiento(String n) throws Exception{
+        //Consultar en la base de datos:
+        BaseDatos.BaseDatos();
+
+        plantilla = "SELECT * FROM ACONTECIMIENTOS WHERE NOMBRE = ?";
+        sentenciaPrep = BaseDatos.getCon().prepareStatement(plantilla);
+        sentenciaPrep.setString(1, n);
+
+        resultado = sentenciaPrep.executeQuery();
+        if (resultado.next()){
+            crearObjeto();
+        }
+        else
+            throw new Exception("No hay ningún acontecimiento con ese nombre");
+
+        BaseDatos.cerrarBD();
+
+        return evento;
+    }
+    public static void crearObjeto() throws Exception{
+        evento = new Evento();
+
+        evento.setNombre(resultado.getString("nombre"));
+        evento.setLoc(resultado.getString("loc"));
+
     }
 }
