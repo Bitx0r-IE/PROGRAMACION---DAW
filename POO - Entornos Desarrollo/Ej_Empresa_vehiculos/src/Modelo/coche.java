@@ -10,8 +10,8 @@ public class coche extends vehiculos{
     private boolean hibrido;
 
     //Constructor:
-    public coche(String marca, int años, double precio, String color, boolean hibrido) {
-        super(marca, años, precio, color);
+    public coche(String marca, int age, double precio, String color, boolean hibrido) {
+        super(marca, age, precio, color);
         this.hibrido = hibrido;
     }
 
@@ -41,7 +41,7 @@ public class coche extends vehiculos{
         return "coche{" + "\n" +
                 "hibrido=" + hibrido + "\n" +
                 ", marca='" + marca + "\n" +
-                ", años=" + años + "\n" +
+                ", años=" + age + "\n" +
                 ", precio=" + precio + "\n" +
                 ", color='" + color + "\n" +
                 ", plus=" + plus + "\n" +

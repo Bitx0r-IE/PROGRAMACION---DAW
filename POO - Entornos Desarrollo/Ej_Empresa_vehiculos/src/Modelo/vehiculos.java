@@ -8,16 +8,16 @@ package Modelo;
  */
 public abstract class vehiculos {
     public String marca;
-    public int años;
+    public int age;
     public double precio;
     public String color;
 
     public int plus;
 
     //Constructor:
-    public vehiculos(String marca, int años, double precio, String color) {
+    public vehiculos(String marca, int age, double precio, String color) {
         this.marca = marca;
-        this.años = años;
+        this.age = age;
         this.precio = precio;
         this.color = color;
     }
@@ -36,11 +36,11 @@ public abstract class vehiculos {
     }
 
     public int getAños() {
-        return años;
+        return age;
     }
 
     public void setAños(int años) {
-        this.años = años;
+        this.age = años;
     }
 
     public double getPrecio() {
@@ -63,7 +63,7 @@ public abstract class vehiculos {
     public String toString() {
         return "vehiculos{" +
                 "marca='" + marca + '\'' +
-                ", años=" + años +
+                ", años=" + age +
                 ", precio=" + precio +
                 ", color='" + color + '\'' +
                 '}';

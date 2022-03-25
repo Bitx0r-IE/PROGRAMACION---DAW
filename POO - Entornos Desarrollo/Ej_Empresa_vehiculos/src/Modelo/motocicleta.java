@@ -7,12 +7,12 @@ package Modelo;
  * @version 18/03/2022
  */
 public class motocicleta extends vehiculos{
-    private double ciclidrada;
+    private double cilindrada;
 
     //Constructor:
-    public motocicleta(String marca, int años, double precio, String color, double ciclidrada) {
-        super(marca, años, precio, color);
-        this.ciclidrada = ciclidrada;
+    public motocicleta(String marca, int age, double precio, String color, double cilindrada) {
+        super(marca, age, precio, color);
+        this.cilindrada = cilindrada;
     }
 
 
@@ -23,7 +23,7 @@ public class motocicleta extends vehiculos{
      * @return precio + plus o 0
      */
     public void plus(){
-        if (getAños()<=4 && ciclidrada >= 120){
+        if (getAños()<=4 && cilindrada >= 120){
             plus = (int) (precio + 250);
         }
         else
@@ -33,9 +33,9 @@ public class motocicleta extends vehiculos{
     @Override
     public String toString() {
         return "motocicleta{" + "\n" +
-                "ciclidrada=" + ciclidrada + "\n" +
+                "ciclidrada=" + cilindrada + "\n" +
                 ", marca='" + marca + "\n" +
-                ", años=" + años + "\n" +
+                ", años=" + age + "\n" +
                 ", precio=" + precio + "\n" +
                 ", color='" + color + "\n" +
                 ", plus=" + (precio + plus) + "\n" +
