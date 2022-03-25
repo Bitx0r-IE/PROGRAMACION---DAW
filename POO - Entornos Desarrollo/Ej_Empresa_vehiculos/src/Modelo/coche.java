@@ -27,13 +27,13 @@ public class coche extends vehiculos{
      * En el caso de los coches, si es híbrido (True) y tiene menos de 5 años, se le añadirá el
      * PLUS al precio.
      *
-     * @return true o false
      */
-    public boolean plus (){
+    public void plus(){
         if (getAños() < 5 && hibrido == true){
-            return true;
+            plus = (int) (precio + 250);
         }
-        return false;
+        else
+            plus = 0;
     }
 
     @Override

@@ -7,7 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class EventoDAO {
 
@@ -20,7 +23,7 @@ public class EventoDAO {
     public static void GuardarEvento(Evento evento) throws Exception {
 
         //Abrir la conexión:
-        BaseDatos.BaseDatos();
+        BaseDatos.abrirBD();
 
         //Preparar la sentencia sql que se quiere ejecutar:
         plantilla = "INSERT INTO (nombre, loc, fecha, horaInicio, horaFin, numPerso) practica_1_2 VALUES(?, ?, ?, ?, ?)";
@@ -52,9 +55,9 @@ public class EventoDAO {
     }
     public static Evento consultarAcontecimiento(String n) throws Exception{
         //Consultar en la base de datos:
-        BaseDatos.BaseDatos();
+        BaseDatos.abrirBD();
 
-        plantilla = "SELECT * FROM ACONTECIMIENTOS WHERE NOMBRE = ?";
+        plantilla = "SELECT * FROM EVENTO WHERE NOMBRE = ?";
         sentenciaPrep = BaseDatos.getCon().prepareStatement(plantilla);
         sentenciaPrep.setString(1, n);
 
@@ -70,10 +73,71 @@ public class EventoDAO {
         return evento;
     }
     public static void crearObjeto() throws Exception{
-        evento = new Evento();
+        //evento = new Evento();
 
         evento.setNombre(resultado.getString("nombre"));
         evento.setLoc(resultado.getString("loc"));
+        // de java.sql.Date a LocalDate:
+        // LocalDate f = resultado.getDate("fecha").toLocalDate(); //yyyy-mm-dd
+        String fe = new SimpleDateFormat("dd/MM/yyyy").format(resultado.getDate("fecha")); // paso a String
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fecha = LocalDate.parse(fe, formato);
 
+        // System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(resultado.getDate("fecha")));
+
+        evento.setFecha(fecha);
+        evento.setHoraInicio(resultado.getTime("horaInicio").toLocalTime());
+        evento.setHoraFin(resultado.getTime("horaFin").toLocalTime());
+        evento.setNumPerso(resultado.getInt("numPerso"));
+    }
+    public static void borrar(Evento e) throws Exception{
+        //Metodo para borrar un evento de la BD:
+        BaseDatos.abrirBD();
+        plantilla = "delete from evento where nombre = ?";
+        sentenciaPrep = BaseDatos.getCon().prepareStatement(plantilla);
+        sentenciaPrep.setString(1, e.getNombre());
+
+        int n = sentenciaPrep.executeUpdate();
+        if (n == 0)
+            throw new Exception();
+        System.out.println(n + " filas borradas");
+        // Cerrar la conexión:
+        BaseDatos.cerrarBD();
+    }
+    public static ArrayList<Evento> consultarAcontecimientos() throws Exception{
+        //Metodo para consultar un evento de la BD:
+        BaseDatos.abrirBD();
+        plantilla = "select * from evento";
+        sentenciaPrep = BaseDatos.getCon().prepareStatement(plantilla);
+        //Puede ser un Statement
+        resultado = sentenciaPrep.executeQuery();
+        ArrayList<Evento> lista = new ArrayList<>();
+        while (resultado.next()){
+            crearObjeto();
+            lista.add(evento);
+        }
+        BaseDatos.cerrarBD();
+        return lista;
+    }
+    public static void actualizar(Evento e) throws Exception {
+        //Metodo save:
+        //Abrir conexión
+        BaseDatos.abrirBD();
+
+        plantilla = "update evento set loc = ?, fecha = ?, horaInicio = ?, horaFin = ?, numPerso = ? where nombre = ?";
+        sentenciaPrep = BaseDatos.getCon().prepareStatement(plantilla);
+        sentenciaPrep.setString(6, e.getNombre());
+        sentenciaPrep.setString(1, e.getLoc());
+        sentenciaPrep.setDate(2, conversionDate(e.getFecha()));
+        sentenciaPrep.setTime(3, conversionTime(e.getHoraInicio()));
+        sentenciaPrep.setTime(4, conversionTime(e.getHoraFin()));
+        sentenciaPrep.setInt(5, e.getNumPerso());
+
+        //Ejecutar sentencia:
+        int n = sentenciaPrep.executeUpdate();
+        System.out.println(n + " filas modificadas");
+
+        //Cerrar conexión:
+        BaseDatos.cerrarBD();
     }
 }

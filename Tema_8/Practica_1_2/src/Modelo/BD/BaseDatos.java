@@ -12,7 +12,7 @@ public class BaseDatos {
 
     private static Connection con;
 
-    public static void BaseDatos() throws Exception{
+    public static void abrirBD() throws Exception{
         //Obtener Driver para mysql:
         Class.forName("com.mysql.cj.jdbc.Driver");
 

@@ -58,7 +58,7 @@ public class V1 {
         miModificarEvento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Main.abrirVentanaModificar();
             }
         });
     }

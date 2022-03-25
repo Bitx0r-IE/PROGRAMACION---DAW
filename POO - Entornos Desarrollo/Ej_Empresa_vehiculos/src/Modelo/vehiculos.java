@@ -68,6 +68,5 @@ public abstract class vehiculos {
                 ", color='" + color + '\'' +
                 '}';
     }
-    public abstract boolean plus();
 
 }
