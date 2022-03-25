@@ -23,7 +23,7 @@ public abstract class vehiculos {
     }
 
     /**
-     *Geenración de setters y getter
+     *Generación de setters y getter
      *
      * @return atributos del objeto vehiculos
      */
@@ -35,12 +35,12 @@ public abstract class vehiculos {
         this.marca = marca;
     }
 
-    public int getAños() {
+    public int getAge() {
         return age;
     }
 
-    public void setAños(int años) {
-        this.age = años;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public double getPrecio() {

@@ -29,7 +29,7 @@ public class coche extends vehiculos{
      *
      */
     public void plus(){
-        if (getAños() < 5 && hibrido == true){
+        if (getAge() < 5 && hibrido == true){
             plus = (int) (precio + 250);
         }
         else

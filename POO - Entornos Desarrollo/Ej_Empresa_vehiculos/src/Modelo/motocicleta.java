@@ -19,11 +19,11 @@ public class motocicleta extends vehiculos{
     /**
      * En el caso de las motocicletas, si tienen una cilindrada mayor o igual a 250 y tienen
      * menos de 4 años, se le añadirá el PLUS al precio
-     *
-     * @return precio + plus o 0
+     *Devuelve el precio +  plus o 0 en caso de que no se aplique el plus
+     * @return void
      */
     public void plus(){
-        if (getAños()<=4 && cilindrada >= 120){
+        if (getAge()<=4 && cilindrada >= 120){
             plus = (int) (precio + 250);
         }
         else
