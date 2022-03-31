@@ -23,7 +23,7 @@ public class Main {
             System.out.print(e.toString());
         }
 
-        saldoActual =  CuentaBancaria.saldo();
+        saldoActual =  CuentaBancaria.getSaldo();
         System.out.println("El saldo actual es"+ saldoActual );
     }
 }

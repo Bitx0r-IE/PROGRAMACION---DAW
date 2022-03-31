@@ -16,6 +16,7 @@ public class Cuenta {
         nombre =nom;
        idcuenta=cue;
         saldo=sal;
+        tipoInterés=tipo;
     }
     //Encapsular:
 
@@ -67,8 +68,6 @@ public class Cuenta {
             throw new Exception("No se puede ingresar una cantidad negativa");
         saldo = saldo + cantidad;
     }
-
-
 
     /* Método para retirar cantidades en la cuenta. Modifica el saldo.
      * Este método va a ser probado con Junit
