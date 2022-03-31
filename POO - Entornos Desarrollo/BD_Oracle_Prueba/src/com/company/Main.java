@@ -18,19 +18,7 @@ public class Main {
             String user = "daw25";
             String passwd = "daw25";
             Connection con = DriverManager.getConnection(url, user, passwd);
-            /*
-            CallableStatement c = con.prepareCall("{call datos_emp25_scott(?)}");
-
-            //Parámetro de salida
-            c.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            c.execute();
-            ResultSet rs = (ResultSet)c.getObject(1);
-            while (rs.next()){
-                System.out.println(rs.getString(2));
-            }
-            rs.close();
-            c.close();
-            */
+            
             CallableStatement c = con.prepareCall("{call datos_emp25_scott_v2(?,?)}");
             c.setInt(1, 1800);
             c.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
